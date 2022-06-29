@@ -11,8 +11,8 @@ export default class BodyHome extends Component {
         <img src="./img/ninja2.svg"/>
         <H1Logo>LabeNinjas</H1Logo>
         <Stack spacing={8} direction='row' align='center'>
-        <Button colorScheme='orange'>Cadastrar</Button>
-        <Button colorScheme='orange'>Contratar</Button>
+        <Button colorScheme='orange' onClick={this.props.changePageCadastro}>Cadastrar</Button>
+        <Button colorScheme='orange' onClick={this.props.changePageContratar}>Contratar</Button>
         </Stack>
      </DivImg>
     
