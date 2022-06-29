@@ -1,22 +1,32 @@
 import React from 'react'
-import './App.css'
-import Header from './Header/header'
-import Body from './Body/body'
+import Header from './Components/Header/Header'
 import { ChakraProvider } from '@chakra-ui/react'
-import {theme} from "./theme"
+import { theme } from "./theme"
+import { GridLayout, Main, Footer, HeaderBackground } from './Components/GridLayout/GridLayout'
+import BodyHome from './Components/BodyHomePage/BodyHome'
 
-class App extends React.Component{
+class App extends React.Component {
 
-render(){
-  return(
-    <ChakraProvider theme={theme}>
-    
-      <Header />,
-      <Body />
-  
-    </ChakraProvider>
-  );
-}
+  render() {
+    return (
+      <ChakraProvider theme={theme}>
+        <GridLayout>
+          <HeaderBackground>
+          <Header />
+          </HeaderBackground>
+
+          <Main>
+          <BodyHome />
+          </Main>
+
+          <Footer>
+
+          </Footer>
+
+        </GridLayout>
+      </ChakraProvider>
+    );
+  }
 
 }
 
