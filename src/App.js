@@ -7,10 +7,17 @@ import BodyHome from './Components/BodyHomePage/BodyHomePage'
 import Cadastro from './Components/Cadastro/Cadastro'
 import CardProdutos from './Components/CardProdutos/CardProdutos'
 import TelaProdutos from './Components/TelaProdutos/TelaProdutos'
+import ShoppingCartPage from './Components/ShoppingCartPage/ShoppingCartPage'
 
 class App extends React.Component {
   state = {
-    pagina: "home"
+    pagina: "home",
+    cart: [],
+    totalValue: 0,
+  }
+
+removeCartItem = (itemToRemove) => {
+    console.log(itemToRemove)
   }
 
   RenderPage = () => {
@@ -54,7 +61,15 @@ class App extends React.Component {
           </HeaderBackground>
 
           <Main>
+          <BodyHome />
+          <ShoppingCartItem 
+            totalValue={this.state.totalValue}  
+            cartItens={this.state.cart}
+            onClick={this.removeCartItem}
+          />
+
             {this.RenderPage()}
+
           </Main>
 
           <Footer>
