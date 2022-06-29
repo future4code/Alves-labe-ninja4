@@ -4,8 +4,18 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { theme } from "./theme"
 import { GridLayout, Main, Footer, HeaderBackground } from './Components/GridLayout/GridLayout'
 import BodyHome from './Components/BodyHomePage/BodyHome'
+import ShoppingCartPage from './Components/ShoppingCartPage/ShoppingCartPage'
 
 class App extends React.Component {
+  state = {
+    cart: [],
+    totalValue: 0,
+  }
+
+  removeCartItem = (itemToRemove) => {
+    console.log(itemToRemove)
+  }
+
 
   render() {
     return (
@@ -17,6 +27,11 @@ class App extends React.Component {
 
           <Main>
           <BodyHome />
+          <ShoppingCartItem 
+            totalValue={this.state.totalValue}  
+            cartItens={this.state.cart}
+            onClick={this.removeCartItem}
+          />
           </Main>
 
           <Footer>
