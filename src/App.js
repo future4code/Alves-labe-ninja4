@@ -7,13 +7,14 @@ import BodyHome from './Components/BodyHomePage/BodyHomePage'
 import Cadastro from './Components/Cadastro/Cadastro'
 import CardProdutos from './Components/CardProdutos/CardProdutos'
 import TelaProdutos from './Components/TelaProdutos/TelaProdutos'
-import ShoppingCartPage from './Components/ShoppingCartPage/ShoppingCartPage'
+import ShoppingCartItem from './Components/ShoppingCartPage/ShoppingCartItem/ShoppingCartItem'
 
 class App extends React.Component {
   state = {
     pagina: "home",
     cart: [],
     totalValue: 0,
+    inputBuscaPorNome: "",
   }
 
   removeCartItem = (itemToRemove) => {
@@ -60,6 +61,9 @@ class App extends React.Component {
   }
 
   
+  onChangeInputBuscaPorNome = (event) => {
+    this.setState({ inputBuscaPorNome: event.target.value });
+};
 
   render() {
     return (
@@ -74,12 +78,15 @@ class App extends React.Component {
 
           <Main>
           
-            {this.RenderPage()}
+              inputBuscaPorNome={this.state.inputBuscaPorNome}
+              onChangeInputBuscaPorNome={this.onChangeInputBuscaPorNome}
+          
+              {this.RenderPage()}
 
           </Main>
 
           <Footer>
-
+              <p>Labeninja ® - 2022 - Todos os direitos reservados</p>
           </Footer>
 
         </GridLayout>

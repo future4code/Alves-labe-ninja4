@@ -6,7 +6,7 @@ export default class ShoppingCartPage extends React.Component {
       
     
     render() {
-        const items = this.props.cartItens && this.props.cartItens.map(item => {
+        const Items = this.props.cartItens && this.props.cartItens.map(item => {
             return <ShoppingCartItem 
                 name={item.name}
                 quantity={item.quantity}
@@ -19,7 +19,7 @@ export default class ShoppingCartPage extends React.Component {
         return (
             <CartContainer>
                 <h2>Carrinho:</h2>
-                    {items}
+                    {Items}
                 <p>Valor total: R$ {this.props.totalValue},00</p>
             </CartContainer>
         )

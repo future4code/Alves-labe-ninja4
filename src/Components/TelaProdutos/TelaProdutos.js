@@ -1,27 +1,18 @@
-import styled from "styled-components"
 import React, { Component } from 'react'
 import axios from "axios"
 import CardProdutos from "../CardProdutos/CardProdutos"
 import { Select } from '@chakra-ui/react'
-import { Input, Text } from '@chakra-ui/react'
-
-const DivDisplayProdutos = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  padding: 10px;`
-
-const DivSelects = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 500px;
-  align-items: center;
-  `
-
+import { Input, InputGroup, InputLeftAddon } from '@chakra-ui/react'
+import { DivDisplayProdutos, DivSelects } from "./Styled"
+import { Alert } from 'reactstrap'
 
 export default class TelaProdutos extends Component {
     state = {
         produtos: [],
+        inputBuscaPorNome: "",
+        valorMinimo: "",
+        valorMaximo: "",
+        parametroOrdenacão: ""
     }
 
     componentDidMount() {
@@ -42,41 +33,99 @@ export default class TelaProdutos extends Component {
             )
             .then((res) => {
                 this.setState({ produtos: res.data.jobs })
-                console.log(this.state.produtos)
-                console.log(this.state.produtos.dueDate)
             })
             .catch((error) => {
-                console.log(error.response)
+                Alert(error.response)
             })
     }
+
+    onChangeInputBuscaPorNome = (event) => {
+        this.setState({ inputBuscaPorNome: event.target.value });
+    };
+    onChangeInputValorMinimo = (event) => {
+        this.setState({ valorMinimo: event.target.value });
+    };
+    onChangeInputValorMaximo = (event) => {
+        this.setState({ valorMaximo: event.target.value });
+    };
+
+    onChangeParametroOrdenação = (event) => {
+        this.setState({ parametroOrdenacão: event.target.value });
+    };
+
 
     render() {
         return (
             <div>
                 <DivSelects>
-                    <Select placeholder='Ordenar Por'>
-                        <option value='option1'>Option 1</option>
-                        <option value='option2'>Option 2</option>
-                        <option value='option3'>Option 3</option>
+                    <Select value={this.state.parametroOrdenacão}
+                        onChange={this.onChangeParametroOrdenação}
+                        placeholder='Ordenar Por'>
+                        <option value={1}>Crescente</option>
+                        <option value={-1}>Decrescente</option>
                     </Select>
+
+                    <InputGroup>
+                        <InputLeftAddon children='Valor Minimo' />
+                        <Input value={this.state.valorMinimo} onChange={this.onChangeInputValorMinimo} focusBorderColor='orange.300' type='number' placeholder='R$' />
+                    </InputGroup>
+
+                    <InputGroup>
+                        <InputLeftAddon children='Valor Maximo' />
+                        <Input value={this.state.valorMaximo} onChange={this.onChangeInputValorMaximo} focusBorderColor='orange.300' type='number' placeholder='R$' />
+                    </InputGroup>
 
 
                 </DivSelects>
 
                 <DivDisplayProdutos>
-                    {this.state.produtos.map((produto) => {
-                        return <CardProdutos
-                            id={produto.id}
-                            title={produto.title}
-                            description={produto.description}
-                            dueDate={produto.dueDate.split("T")[0]}
-                            price={produto.price.toLocaleString(
-                                "pt-BR",
-                                { style: "currency", currency: "BRL" }
-                            )}
-                            paymentMethods={produto.paymentMethods} />
+                    {this.state.produtos.filter((produto) => {
+                        return (
+                            produto.title
+                                .toLowerCase()
+                                .includes(this.props.inputBuscaPorNome.toLowerCase()) ||
+                            produto.description
+                                .toLowerCase()
+                                .includes(this.props.inputBuscaPorNome.toLowerCase())
+                        );
+                    })
+                        .filter((produto) => {
+                            return (
+                                this.state.valorMinimo === "" ||
+                                produto.price >= this.state.valorMinimo.toLocaleString(
+                                    "pt-BR",
+                                    { style: "currency", currency: "BRL" }
+                                )
+                            );
+                        })
+                        .filter((produto) => {
+                            return (
+                                this.state.valorMaximo === "" ||
+                                produto.price <= this.state.valorMaximo.toLocaleString(
+                                    "pt-BR",
+                                    { style: "currency", currency: "BRL" }
+                                )
+                            )
+                        })
+                        .sort((produtoAtual, proximoProduto) => {
+                            return (
+                                this.state.parametroOrdenacão *
+                                (produtoAtual.price - proximoProduto.price)
+                            )
+                        })
+                        .map((produto) => {
+                            return <CardProdutos
+                                id={produto.id}
+                                title={produto.title}
+                                description={produto.description}
+                                dueDate={produto.dueDate.split("T")[0]}
+                                price={produto.price.toLocaleString(
+                                    "pt-BR",
+                                    { style: "currency", currency: "BRL" }
+                                )}
+                                paymentMethods={produto.paymentMethods} />
 
-                    })}
+                        })}
                 </DivDisplayProdutos>
             </div>
         )

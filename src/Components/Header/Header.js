@@ -1,5 +1,5 @@
 import React from 'react'
-import { HeaderCss, DivLogo, Logo, DivLupaCarrinho } from './Styled';
+import { HeaderCss, DivLogo, Logo, DivLupaCarrinho, DivBusca } from './Styled';
 
 export default class Header extends React.Component {
     constructor(props) {
@@ -19,7 +19,7 @@ export default class Header extends React.Component {
         return (
             <HeaderCss>
 
-                <DivLogo>
+                <DivLogo onClick={this.props.changePageHome}>
                     <Logo>LabeNinjas</Logo>
                 </DivLogo>
 
