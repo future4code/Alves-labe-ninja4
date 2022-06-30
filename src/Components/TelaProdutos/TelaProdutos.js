@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import axios from "axios"
 import CardProdutos from "../CardProdutos/CardProdutos"
 import { Select } from '@chakra-ui/react'
-import { Input, Text } from '@chakra-ui/react'
+import { Input, InputGroup, InputLeftAddon } from '@chakra-ui/react'
 
 const DivDisplayProdutos = styled.div`
   display: grid;
@@ -14,8 +14,10 @@ const DivDisplayProdutos = styled.div`
 const DivSelects = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 500px;
+  width: 700px;
   align-items: center;
+  gap: 50px;
+  margin: 0 auto;
   `
 
 
@@ -55,10 +57,19 @@ export default class TelaProdutos extends Component {
             <div>
                 <DivSelects>
                     <Select placeholder='Ordenar Por'>
-                        <option value='option1'>Option 1</option>
-                        <option value='option2'>Option 2</option>
-                        <option value='option3'>Option 3</option>
+                        <option value='Crescente'>Option 1</option>
+                        <option value='Decrescente'>Option 2</option>
                     </Select>
+
+                    <InputGroup>
+                        <InputLeftAddon children='Valor Minimo' />
+                        <Input focusBorderColor='orange.300' type='tel' placeholder='R$' />
+                    </InputGroup>
+
+                    <InputGroup>
+                        <InputLeftAddon children='Valor Maximo' />
+                        <Input focusBorderColor='orange.300' type='tel' placeholder='R$' />
+                    </InputGroup>
 
 
                 </DivSelects>

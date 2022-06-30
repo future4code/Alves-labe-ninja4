@@ -8,6 +8,7 @@ import Cadastro from './Components/Cadastro/Cadastro'
 import CardProdutos from './Components/CardProdutos/CardProdutos'
 import TelaProdutos from './Components/TelaProdutos/TelaProdutos'
 import ShoppingCartPage from './Components/ShoppingCartPage/ShoppingCartPage'
+import ShoppingCartItem from './Components/ShoppingCartPage/ShoppingCartItem/ShoppingCartItem'
 
 class App extends React.Component {
   state = {
@@ -33,6 +34,12 @@ removeCartItem = (itemToRemove) => {
       </Main>
     } else if (this.state.pagina === "contratar") {
       return <TelaProdutos>
+        <ShoppingCartItem 
+            totalValue={this.state.totalValue}  
+            cartItens={this.state.cart}
+            onClick={this.removeCartItem}    
+            // Codigo da Ane ta aqui
+          />
         <CardProdutos /> 
         </TelaProdutos>
     }
@@ -61,12 +68,6 @@ removeCartItem = (itemToRemove) => {
           </HeaderBackground>
 
           <Main>
-          <BodyHome />
-          <ShoppingCartItem 
-            totalValue={this.state.totalValue}  
-            cartItens={this.state.cart}
-            onClick={this.removeCartItem}
-          />
 
             {this.RenderPage()}
 

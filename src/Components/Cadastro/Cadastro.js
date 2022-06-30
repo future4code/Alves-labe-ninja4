@@ -4,7 +4,7 @@ import { Stack, HStack, VStack } from '@chakra-ui/react'
 import { Select } from '@chakra-ui/react'
 import { Button, ButtonGroup } from '@chakra-ui/react'
 import axios from 'axios'
-import {NumberInput, NumberInputField, NumberInputStepper,NumberIncrementStepper,NumberDecrementStepper,} from '@chakra-ui/react'
+import { NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, } from '@chakra-ui/react'
 import { H1Cadastro } from './Styled'
 import { Alert } from 'reactstrap'
 
@@ -13,7 +13,7 @@ export default class Cadastro extends Component {
         produtos: [],
         title: "",
         description: "",
-        price: 0,
+        price: "",
         paymentMethods: [],
         dueDate: "",
     }
@@ -86,10 +86,11 @@ export default class Cadastro extends Component {
                         _placeholder={{ opacity: 1, color: 'gray.500' }} placeholder='Titulo' size='md' />
                     <Input value={this.state.description} onChange={this.handleDescription} focusBorderColor='orange.300' variant='outline'
                         _placeholder={{ opacity: 1, color: 'gray.500' }} placeholder='Descrição' size='md' />
-                    
+
                     <Input value={this.state.price} onChange={this.handlePrice} type='number' focusBorderColor='orange.300' variant='outline'
-                        _placeholder={{ opacity: 1, color: 'gray.500' }} placeholder='Descrição' size='md' />
-                    <Select multiple={false}  onChange={this.handlePaymentMethods} focusBorderColor='orange.300' _placeholder={{ opacity: 0.7, color: 'gray.500' }} placeholder='Opção de Pagamento'>
+                        _placeholder={{ opacity: 1, color: 'gray.500' }} placeholder='Preço' size='md' />
+                    <Select multiple={false} onChange={this.handlePaymentMethods} focusBorderColor='orange.300' _placeholder={{ opacity: 0.7, color: 'gray.500' }}
+                        placeholder='Opção de Pagamento'>
                         <option value='Cartão de Crédito'>Cartão de Crédito</option>
                         <option value='Cartão de Debito'>Cartão de Debito</option>
                         <option value='Pix'>Pix</option>
