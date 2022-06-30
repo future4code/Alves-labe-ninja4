@@ -17,35 +17,32 @@ class App extends React.Component {
     inputBuscaPorNome: "",
   }
 
-removeCartItem = (itemToRemove) => {
+  removeCartItem = (itemToRemove) => {
     console.log(itemToRemove)
   }
 
   RenderPage = () => {
-    if (this.state.pagina === "cadastro") {
-      return <Main>
-        <Cadastro />
-                </Main>
-    } else if (this.state.pagina === "home") {
-      return <Main>
-        <BodyHome
-          changePageCadastro={this.changePageCadastro}
-          changePageContratar={this.changePageContratar} />
-      </Main>
-    } else if (this.state.pagina === "contratar") {
-      return <TelaProdutos
-      inputBuscaPorNome={this.state.inputBuscaPorNome}
-        onChangeInputBuscaPorNome={this.onChangeInputBuscaPorNome}>
-        <ShoppingCartItem 
-            totalValue={this.state.totalValue}  
-            cartItens={this.state.cart}
-            onClick={this.removeCartItem}    
-            // Codigo da Ane ta aqui
-          />
-        <CardProdutos /> 
-        </TelaProdutos>
-    }
-  }
+    switch (this.state.pagina) {
+       case "cadastro": 
+         return <Main>
+           <Cadastro />
+                 </Main>
+       case "home":
+         return <Main>
+           <BodyHome
+             changePageCadastro={this.changePageCadastro}
+             changePageContratar={this.changePageContratar} 
+            />
+         </Main>
+       case "contratar":
+         return <TelaProdutos changePageCarrinho ={this.changePageCarrinho} >
+         <CardProdutos /> 
+         </TelaProdutos >
+        case "carrinho":
+         return <ShoppingCartPage />
+        default:
+         return <div>Error! Page not found.</div>
+    }}
 
   changePageCadastro = () => {
     this.setState({ pagina: "cadastro" })
@@ -59,6 +56,11 @@ removeCartItem = (itemToRemove) => {
     this.setState({ pagina: "home" })
   }
 
+  changePageCarrinho = () => {
+    this.setState({ pagina: "carrinho" })
+  }
+
+  
   onChangeInputBuscaPorNome = (event) => {
     this.setState({ inputBuscaPorNome: event.target.value });
 };
@@ -70,14 +72,16 @@ removeCartItem = (itemToRemove) => {
           <HeaderBackground>
             <Header
               changePageHome={this.changePageHome}
-              inputBuscaPorNome={this.state.inputBuscaPorNome}
-        onChangeInputBuscaPorNome={this.onChangeInputBuscaPorNome}
- />
+              changePageCarrinho={this.changePageCarrinho}
+            />
           </HeaderBackground>
 
           <Main>
-
-            {this.RenderPage()}
+          
+              inputBuscaPorNome={this.state.inputBuscaPorNome}
+              onChangeInputBuscaPorNome={this.onChangeInputBuscaPorNome}
+          
+              {this.RenderPage()}
 
           </Main>
 
