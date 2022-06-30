@@ -36,4 +36,10 @@ grid-area: footer;
 display: flex;
 justify-content: center;
 background-color: #262626;
+color: #c8d6e5;
+padding: 30px;
+
+p{
+    font-size: 12px;
+}
 `

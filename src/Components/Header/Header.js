@@ -1,5 +1,5 @@
 import React from 'react'
-import { HeaderCss, DivLogo, Logo, DivLupaCarrinho } from './Styled';
+import { HeaderCss, DivLogo, Logo, DivLupaCarrinho, DivBusca } from './Styled';
 
 export default class Header extends React.Component {
     constructor(props) {
@@ -19,16 +19,19 @@ export default class Header extends React.Component {
         return (
             <HeaderCss>
 
-                <DivLogo>
+                <DivLogo onClick={this.props.changePageHome}>
                     <Logo>LabeNinjas</Logo>
                 </DivLogo>
 
 
-                <DivLupaCarrinho>
-                    <input placeholder='Pesquisar' />
-                    <a href="#"><img src='./img/lupa-arredondada.png' /></a>
-                    <a onClick={this.props.changePageHome} href='#'><img src='./img/lar.png' /></a>
-                    <a href='#'><img src='./img/compra.png' /></a>
+                
+                    <DivBusca>
+                    <input value={this.props.inputBuscaPorNome} onChange={this.props.onChangeInputBuscaPorNome} placeholder='Pesquisar' />
+                    <a href="#"><img src='./img/lupa-arredondada.png' alt='lupa' /></a>
+                    </DivBusca>
+                    <DivLupaCarrinho>
+                    <a onClick={this.props.changePageHome} href='#'><img src='./img/lar.png' alt='home page' /></a>
+                    <a href='#'><img src='./img/compra.png' alt='carrinho' /></a>
                 </DivLupaCarrinho>
             </HeaderCss>
 

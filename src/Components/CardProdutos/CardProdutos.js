@@ -1,13 +1,7 @@
 import styled from "styled-components";
 import React, { Component } from 'react'
-
-const DivCardProdutos = styled.div`
-display: flex;
-flex-direction: column;
-border: 1px solid;
-border-radius: 2%;
-background-color: white;
-`
+import{Button, ButtonGroup} from '@chakra-ui/react'
+import { DivCardProdutos } from "./Styled";
 
 
 export default class CardProdutos extends Component {
@@ -24,6 +18,7 @@ export default class CardProdutos extends Component {
                         return pagamento + ", "
                     })}</h2>
                     <h2>Data de expiração: {this.props.dueDate}</h2>
+                    <Button colorScheme='orange' size='sm'>Comprar!</Button>
                 </div>
             </DivCardProdutos>
         )
