@@ -68,9 +68,11 @@ export default class Cadastro extends Component {
             )
             .then((res) => {
                 alert("Seu serviço foi cadastrado com sucesso")
+                console.log(res)
             })
             .catch((error) => {
                 Alert(error.response)
+                console.log(error)
             })
     }
 

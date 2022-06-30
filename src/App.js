@@ -7,7 +7,6 @@ import BodyHome from './Components/BodyHomePage/BodyHomePage'
 import Cadastro from './Components/Cadastro/Cadastro'
 import CardProdutos from './Components/CardProdutos/CardProdutos'
 import TelaProdutos from './Components/TelaProdutos/TelaProdutos'
-import ShoppingCartPage from './Components/ShoppingCartPage/ShoppingCartPage'
 import ShoppingCartItem from './Components/ShoppingCartPage/ShoppingCartItem/ShoppingCartItem'
 
 class App extends React.Component {
@@ -15,6 +14,7 @@ class App extends React.Component {
     pagina: "home",
     cart: [],
     totalValue: 0,
+    inputBuscaPorNome: "",
   }
 
 removeCartItem = (itemToRemove) => {
@@ -33,7 +33,9 @@ removeCartItem = (itemToRemove) => {
           changePageContratar={this.changePageContratar} />
       </Main>
     } else if (this.state.pagina === "contratar") {
-      return <TelaProdutos>
+      return <TelaProdutos
+      inputBuscaPorNome={this.state.inputBuscaPorNome}
+        onChangeInputBuscaPorNome={this.onChangeInputBuscaPorNome}>
         <ShoppingCartItem 
             totalValue={this.state.totalValue}  
             cartItens={this.state.cart}
@@ -57,6 +59,10 @@ removeCartItem = (itemToRemove) => {
     this.setState({ pagina: "home" })
   }
 
+  onChangeInputBuscaPorNome = (event) => {
+    this.setState({ inputBuscaPorNome: event.target.value });
+};
+
   render() {
     return (
       <ChakraProvider theme={theme}>
@@ -64,6 +70,8 @@ removeCartItem = (itemToRemove) => {
           <HeaderBackground>
             <Header
               changePageHome={this.changePageHome}
+              inputBuscaPorNome={this.state.inputBuscaPorNome}
+        onChangeInputBuscaPorNome={this.onChangeInputBuscaPorNome}
  />
           </HeaderBackground>
 
@@ -74,7 +82,7 @@ removeCartItem = (itemToRemove) => {
           </Main>
 
           <Footer>
-
+              <p>Labeninja ® - 2022 - Todos os direitos reservados</p>
           </Footer>
 
         </GridLayout>

@@ -8,7 +8,7 @@ export default class BodyHome extends Component {
     return (
     
      <DivImg>
-        <img src="./img/ninja2.svg"/>
+        <img src="./img/ninja2.svg" alt='Ninja logo'/>
         <H1Logo>LabeNinjas</H1Logo>
         <Stack spacing={8} direction='row' align='center'>
         <Button colorScheme='orange' onClick={this.props.changePageCadastro}>Cadastrar</Button>
