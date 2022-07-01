@@ -20,14 +20,12 @@ display: flex;
 align-items: center;
 justify-items: flex-end;
 float: right;  
-
 a img {
     align-items: center;
     width: 20px;
     height: auto;
     margin-left: 20px;
 }
-
 input {
     background-color:white;
     position: relative;
@@ -52,18 +50,15 @@ mix-blend-mode: normal;
 export const DivBusca = styled.div`
 display: flex;
 align-items: center;
-
 input{
     margin-right: 0px;
 }
-
 a img{
     align-items: center;
     width: 20px;
     height: auto;
     margin-left: 2px;
 }
-
 input {
     background-color:white;
     position: relative;
