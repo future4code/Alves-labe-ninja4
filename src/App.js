@@ -16,6 +16,7 @@ class App extends React.Component {
     cart: [],
     totalValue: 0,
     inputBuscaPorNome: "",
+    itensNoCarrinho: [],
   }
 
   removeCartItem = (itemToRemove) => {
@@ -24,28 +25,30 @@ class App extends React.Component {
 
   RenderPage = () => {
     switch (this.state.pagina) {
-       case "cadastro": 
-         return <Main>
-           <Cadastro />
-                 </Main>
-       case "home":
-         return <Main>
-           <BodyHome
-             changePageCadastro={this.changePageCadastro}
-             changePageContratar={this.changePageContratar} 
-            />
-         </Main>
-       case "contratar":
-         return <TelaProdutos changePageCarrinho ={this.changePageCarrinho}
-         inputBuscaPorNome={this.state.inputBuscaPorNome}
-        onChangeInputBuscaPorNome={this.onChangeInputBuscaPorNome} > 
-         <CardProdutos /> 
-         </TelaProdutos >
-        case "carrinho":
-         return <ShoppingCartPage />
-        default:
-         return <div>Error! Page not found.</div>
-    }}
+      case "cadastro":
+        return <Main>
+          <Cadastro />
+        </Main>
+      case "home":
+        return <Main>
+          <BodyHome
+            changePageCadastro={this.changePageCadastro}
+            changePageContratar={this.changePageContratar}
+          />
+        </Main>
+      case "contratar":
+        return <TelaProdutos changePageCarrinho={this.changePageCarrinho}
+          inputBuscaPorNome={this.state.inputBuscaPorNome}
+          onChangeInputBuscaPorNome={this.onChangeInputBuscaPorNome} >
+          <CardProdutos />
+        </TelaProdutos >
+      case "carrinho":
+        return <ShoppingCartPage 
+        cartItens={this.state.itensNoCarrinho}/>
+      default:
+        return <div>Error! Page not found.</div>
+    }
+  }
 
   changePageCadastro = () => {
     this.setState({ pagina: "cadastro" })
@@ -63,10 +66,10 @@ class App extends React.Component {
     this.setState({ pagina: "carrinho" })
   }
 
-  
+
   onChangeInputBuscaPorNome = (event) => {
     this.setState({ inputBuscaPorNome: event.target.value });
-};
+  };
 
   render() {
     return (
@@ -82,13 +85,13 @@ class App extends React.Component {
           </HeaderBackground>
 
           <Main>
-          
-              {this.RenderPage()}
+
+            {this.RenderPage()}
 
           </Main>
 
           <Footer>
-              <p>Labeninja ® - 2022 - Todos os direitos reservados</p>
+            <p>Labeninja ® - 2022 - Todos os direitos reservados</p>
           </Footer>
 
         </GridLayout>
