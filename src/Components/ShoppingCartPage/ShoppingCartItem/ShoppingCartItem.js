@@ -1,13 +1,17 @@
-import { CartItemCard } from "./styles";
+import { CartItemCard } from "./styled";
 import React from "react";
 
 class ShoppingCartItem extends React.Component {
     render() {
       return (
         <CartItemCard>
-          <p>{this.props.quantity}x</p>
-          <p>{this.props.name}</p>
-          <button onClick={this.props.onClick}>Remover</button>
+          <p>Produto: {this.props.title}</p>
+          <p>Quantidade: {this.props.quantidade}x</p>
+          <p>Preço:{this.props.price.toLocaleString(
+                                    "pt-BR",
+                                    { style: "currency", currency: "BRL" }
+                                )}</p>
+          <button onClick={() => this.props.removerItem(this.props.id)}>Remover</button>
         </CartItemCard>
       );
     }

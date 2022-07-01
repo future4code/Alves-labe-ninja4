@@ -1,13 +1,14 @@
-import styled from "styled-components";
 import React, { Component } from 'react'
 import{Button, ButtonGroup} from '@chakra-ui/react'
 import { DivCardProdutos } from "./Styled";
+import ShoppingCartItem from '../ShoppingCartPage/ShoppingCartItem/ShoppingCartItem';
 
 
 export default class CardProdutos extends Component {
 
     render() {
-
+        <ShoppingCartItem
+        id={this.props.id}></ShoppingCartItem>
         return (
             <DivCardProdutos>
                 <div>
