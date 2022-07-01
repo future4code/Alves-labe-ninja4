@@ -1,5 +1,5 @@
 import React from "react";
-import { CartContainer } from "./styles";
+import { CartContainer } from "./styled";
 import ShoppingCartItem from "./ShoppingCartItem/ShoppingCartItem"
 
 export default class ShoppingCartPage extends React.Component {
@@ -8,9 +8,10 @@ export default class ShoppingCartPage extends React.Component {
     render() {
         const Items = this.props.cartItens.map(item => {
             return <ShoppingCartItem 
-                name={item.name}
-                quantity={item.quantity}
-                onClick={() => this.props.onClick(item)}
+                quantidade={item.quantidade}
+                title={item.title}
+                removerItem={this.props.removerItem}
+                price={item.price}
             />
         })
 
@@ -20,7 +21,7 @@ export default class ShoppingCartPage extends React.Component {
             <CartContainer>
                 <h2>Carrinho:</h2>
                     {Items}
-                <p>Valor total: R$ {this.props.totalValue},00</p>
+                <p>Valor total: {this.props.valorTotal()}</p>
             </CartContainer>
         )
     }

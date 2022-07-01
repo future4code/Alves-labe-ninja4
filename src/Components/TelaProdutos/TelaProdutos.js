@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import axios from "axios"
 import CardProdutos from "../CardProdutos/CardProdutos"
 import { Select } from '@chakra-ui/react'
 import { Input, InputGroup, InputLeftAddon } from '@chakra-ui/react'
 import { DivDisplayProdutos, DivSelects } from "./Styled"
-import { Alert } from 'reactstrap'
 
 export default class TelaProdutos extends Component {
     state = {
@@ -13,63 +11,8 @@ export default class TelaProdutos extends Component {
         valorMinimo: "",
         valorMaximo: "",
         parametroOrdenacão: "",
-        itensNoCarrinho: []
-    }
-    componentDidMount() {
-        this.pegarProdutos()
     }
 
-    addCartItem = (itemId) => {
-        const itemNoCarrinho = this.state.itensNoCarrinho.find(
-            (item) => itemId === item.id
-        );
-        if (itemNoCarrinho) {
-            const novosItensCarrinho = this.state.itensNoCarrinho.map((item) => {
-                if (itemId === item.id) {
-                    return {
-                        ...item,
-                        quantidade: item.quantidade + 1
-                    };
-                }
-                return item
-            });
-            this.setState({ itensNoCarrinho: novosItensCarrinho });
-            console.log(novosItensCarrinho)
-            localStorage.setItem("lista", JSON.stringify(novosItensCarrinho))
-        } else {
-            const itemAdicionado = this.state.produtos.find(
-                (item) => itemId === item.id
-            );
-
-            const novosItensCarrinho = [
-                ...this.state.itensNoCarrinho,
-                { ...itemAdicionado, quantidade: 1},
-            ];
-            console.log(novosItensCarrinho);
-            this.setState({ itensNoCarrinho: novosItensCarrinho })
-            localStorage.setItem("lista", JSON.stringify(novosItensCarrinho))
-        }
-    }
-
-    pegarProdutos = () => {
-        const key = 'b49b15f4-f303-4ea9-a198-4107c3effc69'
-
-        axios
-            .get(
-                `https://labeninjas.herokuapp.com/jobs`,
-                {
-                    headers: {
-                        Authorization: `${key}`
-                    }
-                }
-            )
-            .then((res) => {
-                this.setState({ produtos: res.data.jobs })
-            })
-            .catch((error) => {
-                Alert(error.response)
-            })
-    }
 
     onChangeInputBuscaPorNome = (event) => {
         this.setState({ inputBuscaPorNome: event.target.value });
@@ -111,7 +54,7 @@ export default class TelaProdutos extends Component {
                 </DivSelects>
 
                 <DivDisplayProdutos>
-                    {this.state.produtos.filter((produto) => {
+                    {this.props.produtos.filter((produto) => {
                         return (
                             produto.title
                                 .toLowerCase()
@@ -156,7 +99,8 @@ export default class TelaProdutos extends Component {
                                     { style: "currency", currency: "BRL" }
                                 )}
                                 paymentMethods={produto.paymentMethods} 
-                                addCartItem={ () => this.addCartItem(produto.id)}/>
+                                addCartItem={this.props.addCartItem}
+                                />
 
                         })}
                 </DivDisplayProdutos>
