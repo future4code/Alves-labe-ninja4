@@ -25,7 +25,7 @@ export default class Header extends React.Component {
 
 
                 <DivLupaCarrinho>
-                    <input placeholder='Pesquisar' />
+                    <input value={this.props.inputBuscaPorNome} onChange={this.props.onChangeInputBuscaPorNome} placeholder='Pesquisar' />
                     <a href="#"><img src='./img/lupa-arredondada.png' /></a>
                     <a onClick={this.props.changePageHome} href='#'><img src='./img/lar.png' /></a>
                     <a onClick={this.props.changePageCarrinho}  href='#'><img src='./img/compra.png' /></a>
