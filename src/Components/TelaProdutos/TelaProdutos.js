@@ -15,7 +15,6 @@ export default class TelaProdutos extends Component {
         parametroOrdenacão: "",
         itensNoCarrinho: []
     }
-
     componentDidMount() {
         this.pegarProdutos()
     }
