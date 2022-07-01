@@ -8,6 +8,7 @@ import Cadastro from './Components/Cadastro/Cadastro'
 import CardProdutos from './Components/CardProdutos/CardProdutos'
 import TelaProdutos from './Components/TelaProdutos/TelaProdutos'
 import ShoppingCartItem from './Components/ShoppingCartPage/ShoppingCartItem/ShoppingCartItem'
+import ShoppingCartPage from './Components/ShoppingCartPage/ShoppingCartPage'
 
 class App extends React.Component {
   state = {
@@ -35,7 +36,9 @@ class App extends React.Component {
             />
          </Main>
        case "contratar":
-         return <TelaProdutos changePageCarrinho ={this.changePageCarrinho} >
+         return <TelaProdutos changePageCarrinho ={this.changePageCarrinho}
+         inputBuscaPorNome={this.state.inputBuscaPorNome}
+        onChangeInputBuscaPorNome={this.onChangeInputBuscaPorNome} > 
          <CardProdutos /> 
          </TelaProdutos >
         case "carrinho":
@@ -71,15 +74,14 @@ class App extends React.Component {
         <GridLayout>
           <HeaderBackground>
             <Header
+              inputBuscaPorNome={this.state.inputBuscaPorNome}
+              onChangeInputBuscaPorNome={this.onChangeInputBuscaPorNome}
               changePageHome={this.changePageHome}
               changePageCarrinho={this.changePageCarrinho}
             />
           </HeaderBackground>
 
           <Main>
-          
-              inputBuscaPorNome={this.state.inputBuscaPorNome}
-              onChangeInputBuscaPorNome={this.onChangeInputBuscaPorNome}
           
               {this.RenderPage()}
 
