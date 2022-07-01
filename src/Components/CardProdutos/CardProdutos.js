@@ -18,7 +18,7 @@ export default class CardProdutos extends Component {
                         return pagamento + ", "
                     })}</h2>
                     <h2>Data de expiração: {this.props.dueDate}</h2>
-                    <Button colorScheme='orange' size='sm'>Comprar!</Button>
+                    <Button onClick={ () => this.props.addCartItem(this.props.id)} colorScheme='orange' size='sm'>Comprar!</Button>
                 </div>
             </DivCardProdutos>
         )

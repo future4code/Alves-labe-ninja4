@@ -6,7 +6,7 @@ export default class ShoppingCartPage extends React.Component {
       
     
     render() {
-        const Items = this.props.cartItens && this.props.cartItens.map(item => {
+        const Items = this.props.cartItens.map(item => {
             return <ShoppingCartItem 
                 name={item.name}
                 quantity={item.quantity}

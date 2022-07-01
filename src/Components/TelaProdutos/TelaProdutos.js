@@ -12,11 +12,43 @@ export default class TelaProdutos extends Component {
         inputBuscaPorNome: "",
         valorMinimo: "",
         valorMaximo: "",
-        parametroOrdenacão: ""
+        parametroOrdenacão: "",
+        itensNoCarrinho: []
     }
-
     componentDidMount() {
         this.pegarProdutos()
+    }
+
+    addCartItem = (itemId) => {
+        const itemNoCarrinho = this.state.itensNoCarrinho.find(
+            (item) => itemId === item.id
+        );
+        if (itemNoCarrinho) {
+            const novosItensCarrinho = this.state.itensNoCarrinho.map((item) => {
+                if (itemId === item.id) {
+                    return {
+                        ...item,
+                        quantidade: item.quantidade + 1
+                    };
+                }
+                return item
+            });
+            this.setState({ itensNoCarrinho: novosItensCarrinho });
+            console.log(novosItensCarrinho)
+            localStorage.setItem("lista", JSON.stringify(novosItensCarrinho))
+        } else {
+            const itemAdicionado = this.state.produtos.find(
+                (item) => itemId === item.id
+            );
+
+            const novosItensCarrinho = [
+                ...this.state.itensNoCarrinho,
+                { ...itemAdicionado, quantidade: 1},
+            ];
+            console.log(novosItensCarrinho);
+            this.setState({ itensNoCarrinho: novosItensCarrinho })
+            localStorage.setItem("lista", JSON.stringify(novosItensCarrinho))
+        }
     }
 
     pegarProdutos = () => {
@@ -123,7 +155,8 @@ export default class TelaProdutos extends Component {
                                     "pt-BR",
                                     { style: "currency", currency: "BRL" }
                                 )}
-                                paymentMethods={produto.paymentMethods} />
+                                paymentMethods={produto.paymentMethods} 
+                                addCartItem={ () => this.addCartItem(produto.id)}/>
 
                         })}
                 </DivDisplayProdutos>
