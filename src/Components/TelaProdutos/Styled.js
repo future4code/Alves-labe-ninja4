@@ -13,4 +13,5 @@ export const DivSelects = styled.div`
   align-items: center;
   gap: 50px;
   margin: 0 auto;
+  margin-top: 10px;
   `

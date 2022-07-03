@@ -90,6 +90,7 @@ export default class TelaProdutos extends Component {
                         })
                         .map((produto) => {
                             return <CardProdutos
+                                key={produto.id}
                                 id={produto.id}
                                 title={produto.title}
                                 description={produto.description}
